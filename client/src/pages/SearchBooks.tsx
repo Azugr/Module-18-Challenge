@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import type { FormEvent } from 'react';
 import { Container, Col, Form, Button, Card, Row } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
@@ -24,7 +24,7 @@ const SearchBooks = () => {
   // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
   useEffect(() => {
     return () => saveBookIds(savedBookIds);
-  });
+  }, [savedBookIds]);
 
   // create method to search for books and set state on form submit
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -37,13 +37,7 @@ const SearchBooks = () => {
     try {
       const response = await searchGoogleBooks(searchInput);
 
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
-
-      const { items } = await response.json();
-
-      const bookData = items.map((book: GoogleAPIBook) => ({
+      const bookData = response.items.map((book: GoogleAPIBook) => ({
         bookId: book.id,
         authors: book.volumeInfo.authors || ['No author to display'],
         title: book.volumeInfo.title,
@@ -56,6 +50,8 @@ const SearchBooks = () => {
     } catch (err) {
       console.error(err);
     }
+
+    return; // Ensure the function always returns a value
   };
 
   // create function to handle saving a book to our database
@@ -80,6 +76,8 @@ const SearchBooks = () => {
     } catch (err) {
       console.error(err);
     }
+
+    return; // Ensure the function always returns a value
   };
 
   return (

@@ -20,5 +20,5 @@
     "useUnknownInCatchVariables": true
   },
   "include": ["server/src", "client/src"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }

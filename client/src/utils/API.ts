@@ -1,3 +1,5 @@
+const API_KEY = import.meta.env.VITE_GOOGLE_BOOKS_API_KEY;
+
 export const searchGoogleBooks = async (query: string) => {
   try {
     const response = await fetch(
@@ -14,3 +16,4 @@ export const searchGoogleBooks = async (query: string) => {
     return null;
   }
 };
+
