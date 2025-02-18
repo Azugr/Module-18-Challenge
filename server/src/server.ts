@@ -54,13 +54,12 @@ const startApolloServer = async () => {
   // ✅ Serve Frontend in Production
   if (process.env.NODE_ENV === 'production') {
     console.log("🚀 Serving frontend in production...");
-    app.use(express.static(path.join(__dirname, '../client/dist')));
+
+    app.use(express.static(path.join(__dirname, '../client/dist')));  
 
     app.get('*', (_req, res) => {
-      res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+      res.sendFile(path.join(__dirname, '../client/dist/index.html'));  
     });
-  } else {
-    console.log("🚧 Development mode: React frontend not served by backend.");
   }
 
   // ✅ Start Server and Ensure the Correct Port
