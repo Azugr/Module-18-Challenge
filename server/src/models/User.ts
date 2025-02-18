@@ -1,5 +1,5 @@
 import { Schema, model, Document, ObjectId } from 'mongoose';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 export interface IUser extends Document {
   _id: ObjectId; 
@@ -69,12 +69,13 @@ const userSchema = new Schema<IUser>(
 
 userSchema.pre('save', async function (next) {
   if (this.isNew || this.isModified('password')) {
+    console.log("🔑 Hashing password before saving user...");
     const saltRounds = 10;
     this.password = await bcrypt.hash(this.password, saltRounds);
   }
-
   next();
 });
+
 
 userSchema.methods.isCorrectPassword = async function (password: string) {
   return bcrypt.compare(password, this.password);
