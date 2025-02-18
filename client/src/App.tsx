@@ -3,12 +3,16 @@ import { Routes, Route } from "react-router-dom";
 import SearchBooks from "./pages/SearchBooks.js";
 import SavedBooks from "./pages/SavedBooks.js";
 import Navbar from "./components/Navbar.js";
+import { API_URL } from "././config.js"; 
 
 import "./App.css";
 
-// ✅ Create an Apollo Client instance
+console.log(import.meta.env); // Check if the env variables are being loaded
+
+
+// ✅ Create Apollo Client using the correct API URL
 const client = new ApolloClient({
-  uri: "http://localhost:3001/graphql", // Connects to your GraphQL backend
+  uri: `${API_URL}/graphql`, // ✅ Use deployed backend instead of localhost
   cache: new InMemoryCache(),
   headers: {
     Authorization: `Bearer ${localStorage.getItem("id_token")}` || "",
@@ -23,7 +27,7 @@ function App() {
         <Routes>
           <Route path="/" element={<SearchBooks />} />
           <Route path="/saved" element={<SavedBooks />} />
-          <Route path="*" element={<h1 className="display-2">404 - Page Not Found</h1>} />
+          <Route path="*" element={<h1>404 - Page Not Found</h1>} />
         </Routes>
       </>
     </ApolloProvider>
