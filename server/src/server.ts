@@ -46,9 +46,16 @@ const startApolloServer = async () => {
     },
   }));
 
-  // ✅ Serve Static Assets in Production
+  // ✅ Serve Frontend Correctly in Production
   if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../client/build')));
+    app.use(express.static(path.join(__dirname, '../client/dist'), {
+      setHeaders: (res, path) => {
+        if (path.endsWith('.css')) {
+          res.setHeader('Content-Type', 'text/css'); 
+        }
+      }
+    }));
+
   }
 
   // ✅ Start Server

@@ -179,6 +179,8 @@ This project is a web application that allows users to search for books using th
 - **SignUpForm**: Handles user registration.
 
 ---
+### Walkthrough video
+https://drive.google.com/file/d/1VYViQkSFgC3z6AQfFHYkuQ0-yPvGPR4O/view?usp=sharing 
 
 ## Notes:
 - Make sure your Google Books API key is correctly set up in the environment variables.
