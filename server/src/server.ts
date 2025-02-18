@@ -55,12 +55,15 @@ const startApolloServer = async () => {
   if (process.env.NODE_ENV === 'production') {
     console.log("🚀 Serving frontend in production...");
 
-    app.use(express.static(path.join(__dirname, '../client/dist')));  
+    const frontendPath = path.join(__dirname, '../../client/dist'); 
+
+    app.use(express.static(frontendPath));
 
     app.get('*', (_req, res) => {
-      res.sendFile(path.join(__dirname, '../client/dist/index.html'));  
+      res.sendFile(path.join(frontendPath, 'index.html'));
     });
-  }
+}
+
 
   // ✅ Start Server and Ensure the Correct Port
   app.listen(PORT, () => {
