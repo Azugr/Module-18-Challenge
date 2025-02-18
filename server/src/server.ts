@@ -34,7 +34,13 @@ const server = new ApolloServer({
 const startApolloServer = async () => {
   await server.start();
 
-  app.use(cors());
+  app.use(cors({
+    origin: process.env.FRONTEND_URL || "https://module-18-challenge-1.onrender.com", 
+    methods: "GET,POST,OPTIONS",
+    credentials: true
+  }));
+   
+
   app.use(bodyParser.json());
   app.use(express.urlencoded({ extended: false }));
 
