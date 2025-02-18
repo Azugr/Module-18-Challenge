@@ -25,7 +25,7 @@ export const authenticateToken = (req: Request) => {
   }
 
   if (!token) {
-    return;
+    return req;
   }
 
   try {
@@ -34,4 +34,6 @@ export const authenticateToken = (req: Request) => {
   } catch {
     console.log('❌ Invalid token');
   }
+
+  return req;
 };

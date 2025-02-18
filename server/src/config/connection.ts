@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/googlebooks');
+    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/googlebooks');
     console.log('📦 MongoDB Connected');
   } catch (error) {
     console.error('❌ MongoDB Connection Error:', error);
@@ -11,4 +11,3 @@ const connectDB = async () => {
 };
 
 export default connectDB;
-

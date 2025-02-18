@@ -13,15 +13,19 @@ const resolvers = {
   },
   Mutation: {
     login: async (_: any, { email, password }: { email: string; password: string }) => {
+      console.log("Incoming Data: ", email, password);
+      
       const user: IUser | null = await User.findOne({ email });
 
       if (!user) {
+        console.log('No user.');
         throw new AuthenticationError('Incorrect credentials');
       }
 
       const correctPw = await user.isCorrectPassword(password);
 
       if (!correctPw) {
+        console.log('Bad password.');
         throw new AuthenticationError('Incorrect credentials');
       }
 
