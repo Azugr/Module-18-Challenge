@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'node:path';
+import { fileURLToPath } from 'url';
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import cors from 'cors';
@@ -9,6 +10,11 @@ import dotenv from 'dotenv';
 import connectDB from './config/connection.js'; 
 import { typeDefs, resolvers } from './schemas/index.js';
 import { authenticateToken } from './services/auth.js';
+
+// ✅ Manually Define __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 
 // Load environment variables
 dotenv.config();
