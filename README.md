@@ -178,6 +178,8 @@ This project is a web application that allows users to search for books using th
 - **LoginForm**: Handles the login process.
 - **SignUpForm**: Handles user registration.
 
+### Walkthrough video
+https://drive.google.com/file/d/1VYViQkSFgC3z6AQfFHYkuQ0-yPvGPR4O/view?usp=drive_link
 ---
 
 ## Notes:
