@@ -2,9 +2,9 @@ import { useState } from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
-import { ADD_USER } from '../mutations';
-import Auth from '../utils/auth';
-import type { User } from '../models/User';
+import { ADD_USER } from '../mutations.js';
+import Auth from '../utils/auth.js';
+import type { User } from '../models/User.js';
 
 const SignupForm = ({ handleModalClose }: { handleModalClose: () => void }) => {
   // set initial form state

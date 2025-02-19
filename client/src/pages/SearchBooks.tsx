@@ -3,12 +3,12 @@ import type { FormEvent } from 'react';
 import { Container, Col, Form, Button, Card, Row } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 
-import Auth from '../utils/auth';
-import { searchGoogleBooks } from '../utils/API';
-import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
-import { SAVE_BOOK } from '../mutations';
-import type { Book } from '../models/Book';
-import type { GoogleAPIBook } from '../models/GoogleAPIBook';
+import Auth from '../utils/auth.js';
+import { searchGoogleBooks } from '../utils/API.js';
+import { saveBookIds, getSavedBookIds } from '../utils/localStorage.js';
+import { SAVE_BOOK } from '../mutations.js';
+import type { Book } from '../models/Book.js';
+import type { GoogleAPIBook } from '../models/GoogleAPIBook.js';
 
 const SearchBooks = () => {
   // create state for holding returned google api data
