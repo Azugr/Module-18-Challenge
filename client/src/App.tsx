@@ -1,4 +1,5 @@
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import { ApolloClient, InMemoryCache, ApolloProvider, HttpLink, from } from "@apollo/client";
+import { onError } from "@apollo/client/link/error";
 import { Routes, Route } from "react-router-dom";
 import SearchBooks from "./pages/SearchBooks.js";
 import SavedBooks from "./pages/SavedBooks.js";
@@ -6,13 +7,21 @@ import Navbar from "./components/Navbar.js";
 
 import "./App.css";
 
-console.log(import.meta.env); // Check if the env variables are being loaded
+// Error handling link
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+  if (graphQLErrors) {
+    graphQLErrors.forEach(({ message, locations, path }) =>
+      console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)
+    );
+  }
+  if (networkError) {
+    console.log(`[Network error]: ${networkError}`);
+  }
+});
 
-
-// ✅ Create Apollo Client using the correct API URL
-const client = new ApolloClient({
-  uri: `${API_URL}/graphql`, // ✅ Use deployed backend instead of localhost
-  cache: new InMemoryCache(),
+// HTTP link
+const httpLink = new HttpLink({
+  uri: "http://localhost:3001/graphql",
   headers: {
     Authorization: `Bearer ${localStorage.getItem("id_token")}` || "",
   },
@@ -40,4 +49,3 @@ function App() {
 }
 
 export default App;
-
