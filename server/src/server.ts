@@ -4,7 +4,6 @@ import path from 'node:path';
 import { fileURLToPath } from 'url';
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
-//import cors from 'cors';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 
@@ -40,10 +39,22 @@ const startApolloServer = async () => {
   app.use(express.urlencoded({ extended: false }));
 
   // ✅ Apply Apollo GraphQL Middleware with Authentication
+    // ✅ Apply Apollo GraphQL Middleware with Authentication
   app.use('/graphql', expressMiddleware(server, {
     context: async ({ req }) => {
-      authenticateToken(req); 
-      return { user: req.user };
+      const authHeader = req.headers.authorization;
+      let user = null;
+
+      if (authHeader) {
+        try {
+          user = authenticateToken(req); // Only authenticate if a token is provided
+        } catch (error) {
+          console.error("Authentication error:", error);
+          // Handle the error as needed (e.g., log it, return null, etc.)
+        }
+      }
+
+      return { user }; // Allows unauthenticated access for login & register
     },
   }));
 
