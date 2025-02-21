@@ -3,7 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'url';
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
-import cors from 'cors';
+//import cors from 'cors';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 
@@ -34,7 +34,7 @@ const server = new ApolloServer({
 const startApolloServer = async () => {
   await server.start();
 
-  app.use(cors());
+  //app.use(cors());
   app.use(bodyParser.json());
   app.use(express.urlencoded({ extended: false }));
 
