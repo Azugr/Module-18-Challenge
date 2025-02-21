@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { Request } from 'express';
+import { GraphQLError } from 'graphql';
 
 const secret = process.env.JWT_SECRET_KEY || 'mysecretkey';
 // Originally, it was 1 hour (1h), but for easier testing and avoiding frequent re-authentication,
@@ -37,3 +38,10 @@ export const authenticateToken = (req: Request) => {
 
   return req;
 };
+
+export class AuthenticationError extends GraphQLError {
+  constructor(message: string) {
+    super(message, undefined, undefined, undefined, ['UNAUTHENTICATED']);
+    Object.defineProperty(this, 'name', { value: 'AuthenticationError' });
+  }
+}
