@@ -52,13 +52,16 @@ const LoginForm = ({ handleModalClose }: { handleModalClose: () => void }) => {
   return (
     <>
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-        <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-          Something went wrong with your login credentials!
-        </Alert>
+        {showAlert && ( // Conditionally render the Alert component
+          <Alert dismissible onClose={() => setShowAlert(false)} variant='danger'>
+            Something went wrong with your login credentials!
+          </Alert>
+        )}
+        
         <Form.Group className='mb-3'>
           <Form.Label htmlFor='email'>Email</Form.Label>
           <Form.Control
-            type='text'
+            type='email' // Use 'email' type for better validation
             placeholder='Your email'
             name='email'
             onChange={handleInputChange}

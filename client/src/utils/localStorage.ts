@@ -28,3 +28,15 @@ export const removeBookId = (bookId: string) => {
 
   return true;
 };
+
+export const saveUser = (user: { token: string, username: string }) => {
+  localStorage.setItem('id_token', user.token);
+  localStorage.setItem('username', user.username);
+};
+
+export const getUser = () => {
+  return {
+    token: localStorage.getItem('id_token'),
+    username: localStorage.getItem('username'),
+  };
+};

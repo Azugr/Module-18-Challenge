@@ -7,10 +7,16 @@ import App from './App';
 import SearchBooks from './pages/SearchBooks';
 import SavedBooks from './pages/SavedBooks';
 
+// Create an HTTP link for Apollo Client
 const client = new ApolloClient({
-  uri: "http://localhost:3001/graphql", 
+  uri: import.meta.env.VITE_API_URL || 'https://module-18-challenge.onrender.com/graphql',
   cache: new InMemoryCache(),
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem('id_token') || ''}`,
+  },
 });
+
+export default client;
 
 
 const router = createBrowserRouter([

@@ -15,7 +15,6 @@ import { authenticateToken } from './services/auth.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-
 // Load environment variables
 dotenv.config();
 
@@ -39,7 +38,6 @@ const startApolloServer = async () => {
   app.use(express.urlencoded({ extended: false }));
 
   // ✅ Apply Apollo GraphQL Middleware with Authentication
-    // ✅ Apply Apollo GraphQL Middleware with Authentication
   app.use('/graphql', expressMiddleware(server, {
     context: async ({ req }) => {
       const authHeader = req.headers.authorization;
