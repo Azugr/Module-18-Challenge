@@ -1,4 +1,5 @@
 import express from 'express';
+import { Request, Response } from 'express';
 import path from 'node:path';
 import { fileURLToPath } from 'url';
 import { ApolloServer } from '@apollo/server';
@@ -48,7 +49,11 @@ const startApolloServer = async () => {
 
   // ✅ Serve Static Assets in Production
   if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../client/build')));
+    app.use(express.static(path.join(__dirname, '../client/dist')));
+
+    app.get('*', (_: Request, res: Response) => {
+      res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+    });
   }
 
   // ✅ Start Server
